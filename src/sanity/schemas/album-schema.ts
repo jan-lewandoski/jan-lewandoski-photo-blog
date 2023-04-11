@@ -12,7 +12,13 @@ const album = {
       name: "slug",
       title: "Slug",
       type: "slug",
-      options: { source: "location" },
+      options: { source: "name" },
+    },
+    {
+      name: "cover",
+      title: "Album Cover",
+      type: "image",
+      options: { hotspot: true },
     },
     {
       name: "images",

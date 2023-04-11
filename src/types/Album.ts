@@ -4,4 +4,5 @@ export type Album = {
   name: string;
   slug: string;
   images: any;
+  cover: any;
 };
