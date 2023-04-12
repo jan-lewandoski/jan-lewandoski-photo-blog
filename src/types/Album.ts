@@ -5,4 +5,5 @@ export type Album = {
   slug: string;
   images: any;
   cover: any;
+  date: Date;
 };

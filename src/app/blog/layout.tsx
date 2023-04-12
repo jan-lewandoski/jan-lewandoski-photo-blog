@@ -17,7 +17,7 @@ export default function RootLayout({
         <header aria-label="Site Header" className="bg-white">
           <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
             <div className="flex h-16 items-center justify-between">
-              <div className="flex-1 md:flex md:items-center md:gap-12">
+              <div className="flex-1 sm:flex sm:items-center sm:gap-12">
                 <a className="block text-teal-600" href="/">
                   <span className="sr-only">Home</span>
                   <svg
@@ -34,8 +34,8 @@ export default function RootLayout({
                 </a>
               </div>
 
-              <div className="md:flex md:items-center md:gap-12">
-                <nav aria-label="Site Nav" className="hidden md:block">
+              <div className="sm:flex sm:items-center sm:gap-12">
+                <nav aria-label="Site Nav" className="hidden sm:block">
                   <ul className="flex items-center gap-6 text-sm">
                     <li>
                       <a
@@ -57,7 +57,7 @@ export default function RootLayout({
                 </nav>
 
                 <div className="flex items-center gap-4">
-                  <div className="block md:hidden">
+                  <div className="block sm:hidden">
                     <button className="rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

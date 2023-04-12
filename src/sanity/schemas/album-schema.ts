@@ -15,10 +15,16 @@ const album = {
       options: { source: "name" },
     },
     {
+      name: "date",
+      title: "Date",
+      type: "date",
+      options: { dateFormat: "MMMM YYYY" },
+    },
+    {
       name: "cover",
       title: "Album Cover",
       type: "image",
-      options: { hotspot: true },
+      options: { hotspot: true, metadata: ["location"] },
     },
     {
       name: "images",
@@ -27,7 +33,7 @@ const album = {
       of: [
         {
           type: "image",
-          options: { hotspot: true },
+          options: { hotspot: true, metadata: ["location"] },
         },
       ],
     },

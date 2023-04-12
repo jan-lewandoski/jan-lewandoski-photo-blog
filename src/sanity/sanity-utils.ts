@@ -10,12 +10,17 @@ export function urlFor(source: string) {
 
 export async function getAlbums(): Promise<Album[]> {
   return createClient(clientConfig).fetch(
-    groq`*[_type == "album"]{
+    groq`*[_type == "album"] | order(_createdAt asc){
         _id,
         _createdAt,
         name,
         images,
-        cover,
+        "cover": cover.asset->{
+          url,
+          metadata{
+            dimensions
+          }
+        },
         "slug": slug.current,
     }`,
   );
@@ -28,7 +33,13 @@ export async function getAlbum(slug: string): Promise<Album> {
         _createdAt,
         name,
         images,
-        cover,
+        date,
+        "cover": cover.asset->{
+          url,
+          metadata{
+            dimensions
+          }
+        },
         "slug": slug.current,
     }`,
     { slug },
