@@ -1,4 +1,5 @@
 import { getAlbums } from "@/sanity/sanity-utils";
+import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -26,19 +27,23 @@ export default async function Home() {
             key={album._id}
           >
             <Image
-              className="w-full duration-150 ease-in-out group-hover:scale-105 group-hover:brightness-50"
+              className="w-full brightness-50"
               src={album.cover.url}
               alt={album.name}
               width={320}
               height={320}
             />
-            <div className="absolute left-0 top-0 z-10 hidden h-full w-full flex-col content-center items-center text-center group-hover:grid">
+            <div className="absolute left-0 top-0 z-10 grid h-full w-full flex-col content-center items-center text-center">
               <p className="text-lg uppercase tracking-wider text-white">
                 {album.name}
               </p>
               <p className="text-xs uppercase tracking-wider text-gray-300">
                 {album.images ? pluralize(album.images.length, "photo") : null}
               </p>
+              <ArrowRight
+                className="absolute bottom-6 right-6 opacity-100 duration-200 ease-in-out lg:opacity-0 lg:group-hover:opacity-100"
+                color="white"
+              />
             </div>
           </Link>
         ))}

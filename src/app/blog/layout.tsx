@@ -1,5 +1,6 @@
 "use client";
 
+import clsx from "clsx";
 import "../globals.css";
 
 import { usePathname } from "next/navigation";
@@ -13,8 +14,8 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body>
-        <header aria-label="Site Header" className="bg-white">
+      <body className="bg-white">
+        <header aria-label="Site Header">
           <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
             <div className="flex h-16 items-center justify-between">
               <div className="flex-1 sm:flex sm:items-center sm:gap-12">
@@ -37,22 +38,20 @@ export default function RootLayout({
               <div className="sm:flex sm:items-center sm:gap-12">
                 <nav aria-label="Site Nav" className="hidden sm:block">
                   <ul className="flex items-center gap-6 text-sm">
-                    <li>
-                      <a
-                        className="text-gray-500 transition hover:text-gray-500/75"
-                        href="/"
-                      >
-                        Albums
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        className="text-gray-500 transition hover:text-gray-500/75"
-                        href="/"
-                      >
-                        About me
-                      </a>
-                    </li>
+                    {menuLinks.map((link) => (
+                      <li key={link.href}>
+                        <a
+                          className={clsx(
+                            "text-gray-500 transition hover:text-gray-500/75",
+                            pathname.endsWith(link.href) &&
+                              "underline decoration-gray-500 underline-offset-4",
+                          )}
+                          href={link.href}
+                        >
+                          {link.title}
+                        </a>
+                      </li>
+                    ))}
                   </ul>
                 </nav>
 
@@ -85,3 +84,14 @@ export default function RootLayout({
     </html>
   );
 }
+
+const menuLinks = [
+  {
+    title: "Albums",
+    href: "/blog/albums",
+  },
+  {
+    title: "About me",
+    href: "/blog/about",
+  },
+];

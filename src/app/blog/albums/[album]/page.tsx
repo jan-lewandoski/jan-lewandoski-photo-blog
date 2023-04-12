@@ -24,7 +24,7 @@ export default async function AlbumPage({ params }: AlbumPageProps) {
       <ul className="mt-4 columns-1 gap-4 md:columns-2 lg:columns-3">
         {album.images.map((img: any) => (
           <Image
-            alt="xaxa"
+            alt={album.name}
             className="mb-4 w-full"
             key={img.ref}
             src={urlFor(img).url()}
