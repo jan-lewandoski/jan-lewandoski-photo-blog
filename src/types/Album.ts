@@ -1,4 +1,5 @@
-type SanityImage = {
+export type SanityImage = {
+  _id: string;
   url: string;
   metadata: {
     dimensions: {

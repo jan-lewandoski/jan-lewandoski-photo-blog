@@ -1,3 +1,4 @@
+import { visionTool } from "@sanity/vision";
 import { defineConfig } from "sanity";
 import { deskTool } from "sanity/desk";
 
@@ -9,7 +10,7 @@ const config = defineConfig({
   title: "My personal website",
   basePath: "/admin",
   apiVersion: "v1",
-  plugins: [deskTool()],
+  plugins: [deskTool(), visionTool()],
   schema: { types: schemas },
 });
 

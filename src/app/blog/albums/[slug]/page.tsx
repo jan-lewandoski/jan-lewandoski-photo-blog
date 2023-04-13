@@ -1,15 +1,14 @@
 import { getAlbum } from "@/sanity/sanity-utils";
 import dayjs from "dayjs";
 import Image from "next/image";
+import Link from "next/link";
 
 interface AlbumPageProps {
-  params: { album: string };
+  params: { slug: string };
 }
 
 export default async function AlbumPage({ params }: AlbumPageProps) {
-  const slug = params.album;
-
-  const album = await getAlbum(slug);
+  const album = await getAlbum(params.slug);
 
   return (
     <div>
@@ -23,19 +22,23 @@ export default async function AlbumPage({ params }: AlbumPageProps) {
       </div>
       <ul className="mt-4 columns-1 gap-4 sm:columns-2 lg:columns-3">
         {album.images.map((img) => (
-          <Image
+          <Link
+            href={`/blog/albums/${params.slug}/${img._id}`}
+            className="mb-4 w-full cursor-zoom-in hover:brightness-110"
             key={img.url}
-            className="w-full"
-            src={img.url}
-            alt={album.name}
-            width={img.metadata.dimensions.width}
-            height={img.metadata.dimensions.height}
-            placeholder="blur"
-            blurDataURL={img.metadata.lqip}
-            sizes="(max-width: 640px) 100vw,
+          >
+            <Image
+              src={img.url}
+              alt={album.name}
+              width={img.metadata.dimensions.width}
+              height={img.metadata.dimensions.height}
+              placeholder="blur"
+              blurDataURL={img.metadata.lqip}
+              sizes="(max-width: 640px) 100vw,
           (max-width: 1024) 50vw,
           33vw"
-          />
+            />
+          </Link>
         ))}
       </ul>
     </div>

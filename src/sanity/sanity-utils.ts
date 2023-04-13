@@ -1,4 +1,4 @@
-import { Album } from "@/types/Album";
+import { Album, SanityImage } from "@/types/Album";
 import { createClient, groq } from "next-sanity";
 import clientConfig from "./config/client-config";
 
@@ -10,7 +10,7 @@ export async function getAlbums(): Promise<Album[]> {
         name,
         images,
         "cover": images[0].asset->{
-          url,
+          "url": url + "?w=1200",
           metadata{
             dimensions,
             lqip
@@ -28,7 +28,8 @@ export async function getAlbum(slug: string): Promise<Album> {
         _createdAt,
         name,
         "images": images[].asset->{
-          url,
+          _id,
+          "url": url + "?w=1200",
           metadata{
             dimensions,
             lqip
@@ -38,5 +39,24 @@ export async function getAlbum(slug: string): Promise<Album> {
         "slug": slug.current,
     }`,
     { slug },
+  );
+}
+
+export async function getPhotoFromAlbum(
+  photoId: string,
+  slug: string,
+): Promise<SanityImage> {
+  return createClient(clientConfig).fetch(
+    groq`*[_type == "album" && slug.current == $slug] {
+      "image": images[asset->_id == $photoId][0].asset->{
+              _id,
+              url,
+              metadata{
+                dimensions,
+                lqip
+              }
+            },
+    }[0]`,
+    { photoId, slug },
   );
 }
