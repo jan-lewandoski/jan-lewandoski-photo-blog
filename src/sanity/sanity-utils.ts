@@ -15,7 +15,7 @@ export async function getAlbums(): Promise<Album[]> {
         _createdAt,
         name,
         images,
-        "cover": cover.asset->{
+        "cover": images[0].asset->{
           url,
           metadata{
             dimensions,

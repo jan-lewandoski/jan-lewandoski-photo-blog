@@ -21,12 +21,6 @@ const album = {
       options: { dateFormat: "MMMM YYYY" },
     },
     {
-      name: "cover",
-      title: "Album Cover",
-      type: "image",
-      options: { hotspot: true, metadata: ["location", "lqip"] },
-    },
-    {
       name: "images",
       title: "Images",
       type: "array",
