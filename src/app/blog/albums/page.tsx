@@ -32,6 +32,8 @@ export default async function Home() {
               alt={album.name}
               width={album.cover.metadata.dimensions.width}
               height={album.cover.metadata.dimensions.height}
+              placeholder="blur"
+              blurDataURL={album.cover.metadata.lqip}
               sizes="(max-width: 640px) 100vw,
               (max-width: 1024) 50vw,
               33vw"

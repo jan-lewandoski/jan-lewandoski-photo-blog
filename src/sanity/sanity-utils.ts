@@ -18,7 +18,8 @@ export async function getAlbums(): Promise<Album[]> {
         "cover": cover.asset->{
           url,
           metadata{
-            dimensions
+            dimensions,
+            lqip
           }
         },
         "slug": slug.current,

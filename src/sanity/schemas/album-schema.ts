@@ -24,7 +24,7 @@ const album = {
       name: "cover",
       title: "Album Cover",
       type: "image",
-      options: { hotspot: true, metadata: ["location"] },
+      options: { hotspot: true, metadata: ["location", "lqip"] },
     },
     {
       name: "images",
@@ -33,7 +33,7 @@ const album = {
       of: [
         {
           type: "image",
-          options: { hotspot: true, metadata: ["location"] },
+          options: { hotspot: true, metadata: ["location", "lqip"] },
         },
       ],
     },
