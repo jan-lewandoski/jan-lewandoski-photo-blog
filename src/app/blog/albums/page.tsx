@@ -19,7 +19,7 @@ export default async function Home() {
           April 2022 - April 2023
         </h3>
       </div>
-      <ul className="columns-1 gap-4 md:columns-2 lg:columns-3">
+      <ul className="columns-1 gap-4 sm:columns-2 lg:columns-3">
         {albums.map((album) => (
           <Link
             href={`/blog/albums/${album.slug}`}
@@ -30,8 +30,11 @@ export default async function Home() {
               className="w-full brightness-50"
               src={album.cover.url}
               alt={album.name}
-              width={320}
-              height={320}
+              width={album.cover.metadata.dimensions.width}
+              height={album.cover.metadata.dimensions.height}
+              sizes="(max-width: 640px) 100vw,
+              (max-width: 1024) 50vw,
+              33vw"
             />
             <div className="absolute left-0 top-0 z-10 grid h-full w-full flex-col content-center items-center text-center">
               <p className="text-lg uppercase tracking-wider text-white">
@@ -41,7 +44,7 @@ export default async function Home() {
                 {album.images ? pluralize(album.images.length, "photo") : null}
               </p>
               <ArrowRight
-                className="absolute bottom-6 right-6 opacity-100 duration-200 ease-in-out lg:opacity-0 lg:group-hover:opacity-100"
+                className="absolute bottom-6 right-6 opacity-0 duration-200 ease-in-out lg:group-hover:opacity-100"
                 color="white"
               />
             </div>
