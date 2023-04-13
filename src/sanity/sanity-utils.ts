@@ -45,7 +45,7 @@ export async function getAlbum(slug: string): Promise<Album> {
 export async function getPhotoFromAlbum(
   photoId: string,
   slug: string,
-): Promise<SanityImage> {
+): Promise<{ image: SanityImage }> {
   return createClient(clientConfig).fetch(
     groq`*[_type == "album" && slug.current == $slug] {
       "image": images[asset->_id == $photoId][0].asset->{

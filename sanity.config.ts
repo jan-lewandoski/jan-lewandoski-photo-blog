@@ -7,9 +7,9 @@ import schemas from "./src/sanity/schemas";
 const config = defineConfig({
   projectId: "e9z14x99", // Configure with env vars
   dataset: "production", // Configure with env vars
-  title: "My personal website",
+  title: "Jan Lewandoski - Photo Blog",
   basePath: "/admin",
-  apiVersion: "v1",
+  apiVersion: "v2021-10-21",
   plugins: [deskTool(), visionTool()],
   schema: { types: schemas },
 });

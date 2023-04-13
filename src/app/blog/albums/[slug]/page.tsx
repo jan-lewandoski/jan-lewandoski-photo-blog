@@ -24,8 +24,8 @@ export default async function AlbumPage({ params }: AlbumPageProps) {
         {album.images.map((img) => (
           <Link
             href={`/blog/albums/${params.slug}/${img._id}`}
-            className="mb-4 w-full cursor-zoom-in hover:brightness-110"
             key={img.url}
+            className="relative mb-4 flex cursor-zoom-in hover:brightness-110"
           >
             <Image
               src={img.url}
