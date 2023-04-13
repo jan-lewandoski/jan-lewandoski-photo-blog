@@ -19,7 +19,7 @@ export default async function Home() {
           April 2022 - April 2023
         </h3>
       </div>
-      <ul className="columns-1 gap-4 sm:columns-2 lg:columns-3">
+      <ul className="mt-4 columns-1 gap-4 sm:columns-2 lg:columns-3">
         {albums.map((album) => (
           <Link
             href={`/blog/albums/${album.slug}`}

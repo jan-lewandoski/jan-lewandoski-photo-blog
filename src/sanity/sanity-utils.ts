@@ -1,12 +1,6 @@
 import { Album } from "@/types/Album";
-import imageUrlBuilder from "@sanity/image-url";
 import { createClient, groq } from "next-sanity";
 import clientConfig from "./config/client-config";
-
-export function urlFor(source: string) {
-  const builder = imageUrlBuilder(createClient(clientConfig));
-  return builder.image(source);
-}
 
 export async function getAlbums(): Promise<Album[]> {
   return createClient(clientConfig).fetch(
@@ -33,14 +27,14 @@ export async function getAlbum(slug: string): Promise<Album> {
         _id,
         _createdAt,
         name,
-        images,
-        date,
-        "cover": cover.asset->{
+        "images": images[].asset->{
           url,
           metadata{
-            dimensions
+            dimensions,
+            lqip
           }
         },
+        date,
         "slug": slug.current,
     }`,
     { slug },

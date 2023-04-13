@@ -1,4 +1,4 @@
-import { getAlbum, urlFor } from "@/sanity/sanity-utils";
+import { getAlbum } from "@/sanity/sanity-utils";
 import dayjs from "dayjs";
 import Image from "next/image";
 
@@ -21,15 +21,20 @@ export default async function AlbumPage({ params }: AlbumPageProps) {
           {dayjs(album.date).format("MMMM YYYY")}
         </h3>
       </div>
-      <ul className="mt-4 columns-1 gap-4 md:columns-2 lg:columns-3">
-        {album.images.map((img: any) => (
+      <ul className="mt-4 columns-1 gap-4 sm:columns-2 lg:columns-3">
+        {album.images.map((img) => (
           <Image
+            key={img.url}
+            className="w-full"
+            src={img.url}
             alt={album.name}
-            className="mb-4 w-full"
-            key={img.ref}
-            src={urlFor(img).url()}
-            width={320}
-            height={180}
+            width={img.metadata.dimensions.width}
+            height={img.metadata.dimensions.height}
+            placeholder="blur"
+            blurDataURL={img.metadata.lqip}
+            sizes="(max-width: 640px) 100vw,
+          (max-width: 1024) 50vw,
+          33vw"
           />
         ))}
       </ul>

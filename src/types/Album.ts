@@ -1,9 +1,21 @@
+type SanityImage = {
+  url: string;
+  metadata: {
+    dimensions: {
+      width: number;
+      height: number;
+      aspectRatio: number;
+    };
+    lqip: string;
+  };
+};
+
 export type Album = {
   _createdAt: Date;
   _id: string;
   name: string;
   slug: string;
-  images: any;
-  cover: any;
+  images: SanityImage[];
+  cover: SanityImage;
   date: Date;
 };
