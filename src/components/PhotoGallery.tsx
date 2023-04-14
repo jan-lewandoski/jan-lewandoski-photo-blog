@@ -35,7 +35,7 @@ export default function PhotoGallery({
         />
       </div>
 
-      <ul className="relative z-30 mb-6 flex w-full max-w-screen-xl gap-2 px-4">
+      <ul className="relative z-30 mb-6 flex w-full max-w-screen-xl items-center justify-center gap-2 px-4">
         {album.images.map((image) => (
           <Link key={image._id} href={`${albumPath}/${image._id}`}>
             <Image
