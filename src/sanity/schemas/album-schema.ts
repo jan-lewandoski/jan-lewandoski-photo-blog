@@ -27,7 +27,7 @@ const album = {
       of: [
         {
           type: "image",
-          options: { hotspot: true, metadata: ["location", "lqip"] },
+          options: { hotspot: true, metadata: ["location", "blurhash"] },
         },
       ],
     },
