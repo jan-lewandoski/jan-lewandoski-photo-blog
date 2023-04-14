@@ -1,15 +1,15 @@
-import { Album, SanityImage } from "@/types/Album";
+import { SanityImage } from "@/types/Album";
 import Image from "next/image";
 import Link from "next/link";
 
 interface PhotoGalleryProps {
-  album: Album;
   currentPhoto: SanityImage;
+  previewImages: SanityImage[];
   albumPath: string;
 }
 
 export default function PhotoGallery({
-  album,
+  previewImages,
   currentPhoto,
   albumPath,
 }: PhotoGalleryProps) {
@@ -36,13 +36,13 @@ export default function PhotoGallery({
       </div>
 
       <ul className="relative z-30 mb-6 flex w-full max-w-screen-xl items-center justify-center gap-2 px-4">
-        {album.images.map((image) => (
+        {previewImages.map((image) => (
           <Link key={image._id} href={`${albumPath}/${image._id}`}>
             <Image
               src={image.url}
               alt={"Picture"}
-              width={84}
-              height={56}
+              width={120}
+              height={90}
               placeholder="blur"
               blurDataURL={image.metadata.lqip}
             />
