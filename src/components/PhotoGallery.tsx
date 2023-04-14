@@ -32,8 +32,6 @@ export default function PhotoGallery({
           alt={"Picture"}
           width={currentPhoto.metadata.dimensions.width}
           height={currentPhoto.metadata.dimensions.height}
-          placeholder="blur"
-          blurDataURL={currentPhoto.metadata.lqip}
         />
       </div>
 
