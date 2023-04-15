@@ -26,6 +26,7 @@ export default function PhotoGallery({
           priority
         />
       </Link>
+
       <div className="z-30 m-auto max-w-screen-xl p-4">
         <Image
           src={currentPhoto.url}
@@ -35,10 +36,15 @@ export default function PhotoGallery({
         />
       </div>
 
-      <ul className="relative z-30 mb-6 flex w-full max-w-screen-xl items-center justify-center gap-2 px-4">
+      <ul className="absolute bottom-0 left-0 z-30 mb-8 flex w-full items-center justify-center gap-2 px-4">
         {previewImages.map((image) => (
           <Link key={image._id} href={`${albumPath}/${image._id}`}>
             <Image
+              className={
+                image._id === currentPhoto._id
+                  ? "brightness-100"
+                  : "brightness-75"
+              }
               src={image.url}
               alt={"Picture"}
               width={120}

@@ -12,12 +12,12 @@ export default async function PhotoPage({ params }: PhotoPageProps) {
   );
 
   return (
-    <main className="mx-auto max-w-[1960px] p-4">
+    <div className="mx-auto max-w-[1960px] p-4">
       <PhotoGallery
         previewImages={previewImages}
         currentPhoto={image}
         albumPath={`/blog/albums/${params.slug}`}
       />
-    </main>
+    </div>
   );
 }
