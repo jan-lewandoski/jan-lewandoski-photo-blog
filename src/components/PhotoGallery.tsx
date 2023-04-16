@@ -2,6 +2,51 @@ import { SanityImage } from "@/types/Album";
 import Image from "next/image";
 import Link from "next/link";
 
+type Dimensions = SanityImage["metadata"]["dimensions"];
+type Orientation = "horizontal" | "vertical";
+
+function getOrientation(dimensions: Dimensions): Orientation {
+  return dimensions.width > dimensions.height ? "horizontal" : "vertical";
+}
+
+function getMainPhotoDimensions(dimensions: Dimensions): Dimensions {
+  const orientation = getOrientation(dimensions);
+
+  switch (orientation) {
+    case "horizontal":
+      return {
+        width: 1280,
+        height: 960,
+        aspectRatio: 4 / 3,
+      };
+    case "vertical":
+      return {
+        width: 720,
+        height: 960,
+        aspectRatio: 3 / 4,
+      };
+  }
+}
+
+function getPreviewPhotoDimensions(dimensions: Dimensions): Dimensions {
+  const orientation = getOrientation(dimensions);
+
+  switch (orientation) {
+    case "horizontal":
+      return {
+        width: 104,
+        height: 78,
+        aspectRatio: 4 / 3,
+      };
+    case "vertical":
+      return {
+        width: 78,
+        height: 104,
+        aspectRatio: 3 / 4,
+      };
+  }
+}
+
 interface PhotoGalleryProps {
   currentPhoto: SanityImage;
   previewImages: SanityImage[];
@@ -27,12 +72,14 @@ export default function PhotoGallery({
         />
       </Link>
 
-      <div className="z-30 m-auto max-w-screen-xl p-4">
+      <div className="z-30 m-auto p-4">
         <Image
           src={currentPhoto.url}
           alt={"Picture"}
-          width={currentPhoto.metadata.dimensions.width}
-          height={currentPhoto.metadata.dimensions.height}
+          width={getMainPhotoDimensions(currentPhoto.metadata.dimensions).width}
+          height={
+            getMainPhotoDimensions(currentPhoto.metadata.dimensions).height
+          }
         />
       </div>
 
@@ -47,8 +94,15 @@ export default function PhotoGallery({
               }
               src={image.url}
               alt={"Picture"}
-              width={120}
-              height={90}
+              // TODO Cannot be based on currentPhoto
+              width={
+                getPreviewPhotoDimensions(currentPhoto.metadata.dimensions)
+                  .width
+              }
+              height={
+                getPreviewPhotoDimensions(currentPhoto.metadata.dimensions)
+                  .height
+              }
               placeholder="blur"
               blurDataURL={image.metadata.lqip}
             />
