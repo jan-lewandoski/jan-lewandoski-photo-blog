@@ -20,13 +20,14 @@ export default async function Home() {
         </h3>
       </div>
       <ul className="mt-4 columns-1 gap-4 sm:columns-2 lg:columns-3">
-        {albums.map((album) => (
+        {albums.map((album, index) => (
           <Link
             href={`/blog/albums/${album.slug}`}
             className="group relative mb-4 flex cursor-pointer flex-col"
             key={album._id}
           >
             <Image
+              priority={index === 0}
               className="w-full brightness-50"
               src={album.cover.url}
               alt={album.name}
