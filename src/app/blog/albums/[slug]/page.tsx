@@ -21,13 +21,14 @@ export default async function AlbumPage({ params }: AlbumPageProps) {
         </h3>
       </div>
       <ul className="mt-4 columns-1 gap-4 sm:columns-2 lg:columns-3">
-        {album.images.map((img) => (
+        {album.images.map((img, index) => (
           <Link
             href={`/blog/albums/${params.slug}/${img._id}`}
             key={img.url}
             className="relative mb-4 flex cursor-zoom-in hover:brightness-110"
           >
             <Image
+              priority={index === 0}
               src={img.url}
               alt={album.name}
               width={img.metadata.dimensions.width}
