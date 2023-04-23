@@ -1,16 +1,19 @@
+import BlogLayout from "@/components/BlogLayout";
 import { getAlbums } from "@/sanity/sanity-utils";
 import { ArrowRight } from "lucide-react";
+import { InferGetServerSidePropsType } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { ReactElement } from "react";
 
 const pluralize = (count: number, noun: string, suffix = "s") =>
   `${count} ${noun}${count !== 1 ? suffix : ""}`;
 
-export default async function Home() {
-  const albums = await getAlbums();
-
+export default function Albums({
+  albums,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
-    <div>
+    <div className="mx-auto mt-8 max-w-screen-xl px-4 sm:px-6 lg:px-8">
       <div className="mb-4">
         <h1 className="text-3xl font-light uppercase tracking-wider text-gray-800">
           All albums
@@ -57,3 +60,17 @@ export default async function Home() {
     </div>
   );
 }
+
+export async function getServerSideProps() {
+  const albums = await getAlbums();
+
+  return {
+    props: {
+      albums,
+    },
+  };
+}
+
+Albums.getLayout = function getLayout(page: ReactElement) {
+  return <BlogLayout>{page}</BlogLayout>;
+};

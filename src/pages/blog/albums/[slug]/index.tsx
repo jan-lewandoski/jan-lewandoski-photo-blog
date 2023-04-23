@@ -1,18 +1,18 @@
+import BlogLayout from "@/components/BlogLayout";
 import { getAlbum } from "@/sanity/sanity-utils";
 import dayjs from "dayjs";
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { ReactElement } from "react";
 
-interface AlbumPageProps {
-  params: { slug: string };
-}
-
-export default async function AlbumPage({ params }: AlbumPageProps) {
-  const album = await getAlbum(params.slug);
-
+export default function AlbumPage({
+  album,
+  slug,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
-    <div>
-      <div className="mb-4">
+    <div className="mx-auto mt-8 max-w-screen-xl px-4 sm:px-6 lg:px-8">
+      <div className="mb-4 ">
         <h1 className="text-3xl font-light uppercase tracking-wider text-gray-800">
           {album.name}
         </h1>
@@ -23,7 +23,7 @@ export default async function AlbumPage({ params }: AlbumPageProps) {
       <ul className="mt-4 columns-1 gap-4 sm:columns-2 lg:columns-3">
         {album.images.map((img, index) => (
           <Link
-            href={`/blog/albums/${params.slug}/${img._id}`}
+            href={`/blog/albums/${slug}/${img._id}`}
             key={img.url}
             className="relative mb-4 flex cursor-zoom-in hover:brightness-110"
           >
@@ -45,3 +45,22 @@ export default async function AlbumPage({ params }: AlbumPageProps) {
     </div>
   );
 }
+
+export async function getServerSideProps({
+  params,
+}: GetServerSidePropsContext) {
+  const slug = (params?.slug as string) || "";
+
+  const album = await getAlbum(slug);
+
+  return {
+    props: {
+      album,
+      slug,
+    },
+  };
+}
+
+AlbumPage.getLayout = function getLayout(page: ReactElement) {
+  return <BlogLayout>{page}</BlogLayout>;
+};
