@@ -1,7 +1,11 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {
+  Hydrate,
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
 import { type NextPage } from "next";
 import { type AppProps } from "next/app";
-import { type ReactElement, type ReactNode } from "react";
+import { useRef, type ReactElement, type ReactNode } from "react";
 
 import "../styles/globals.css";
 
@@ -13,17 +17,19 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
-const queryClient = new QueryClient();
-
 const MyApp = ({
   Component,
-  pageProps: { session, ...pageProps },
+  pageProps: { session, dehydratedState, ...pageProps },
 }: AppPropsWithLayout) => {
   const getLayout = Component.getLayout ?? ((page) => page);
 
+  const queryClient = useRef(new QueryClient());
+
   return (
-    <QueryClientProvider client={queryClient}>
-      {getLayout(<Component {...pageProps} />)}
+    <QueryClientProvider client={queryClient.current}>
+      <Hydrate state={dehydratedState}>
+        {getLayout(<Component {...pageProps} />)}
+      </Hydrate>
     </QueryClientProvider>
   );
 };
